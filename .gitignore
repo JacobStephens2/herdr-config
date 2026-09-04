@@ -1,0 +1,9 @@
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Herdr runtime & log files
+*.log
+*.sock
+session.json
+.plugins.lock

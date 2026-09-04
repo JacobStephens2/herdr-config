@@ -1,0 +1,28 @@
+# Herdr Configuration
+# Path: ~/.config/herdr/config.toml
+
+[keys]
+# Prefix key (default: ctrl+b)
+prefix = "ctrl+b"
+
+# --- Workspace Navigation ---
+
+# Switch directly to workspace 1–9: Ctrl+b, then Shift+1..9 (!, @, #, etc.)
+# (Note: Ctrl+b then 1..9 continues to switch tabs)
+switch_workspace = "prefix+shift+1..9"
+
+# Previous / Next workspace:
+# Press Ctrl+b, then [ or ] (also supports tmux session style: Ctrl+b, then ( or ))
+previous_workspace = ["prefix+[", "prefix+("]
+next_workspace = ["prefix+]", "prefix+)"]
+
+# Note: In default Herdr, copy_mode is assigned to "prefix+[".
+# To avoid conflict with previous_workspace, copy_mode is moved to "prefix+escape" (or use mouse drag-select).
+copy_mode = "prefix+escape"
+
+# Built-in workspace shortcuts available by default:
+# workspace_picker = "prefix+w"        # Open workspace navigation surface (Up/Down to navigate, Enter to select)
+# goto             = "prefix+g"        # Session / workspace fuzzy search navigator
+# new_workspace    = "prefix+shift+n"  # Create new workspace
+# rename_workspace = "prefix+shift+w"  # Rename current workspace
+# close_workspace  = "prefix+shift+d"  # Close current workspace
