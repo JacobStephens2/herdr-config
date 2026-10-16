@@ -1,3 +1,4 @@
+onboarding = false
 # Herdr Configuration
 # Path: ~/.config/herdr/config.toml
 
@@ -26,3 +27,17 @@ copy_mode = "prefix+escape"
 # new_workspace    = "prefix+shift+n"  # Create new workspace
 # rename_workspace = "prefix+shift+w"  # Rename current workspace
 # close_workspace  = "prefix+shift+d"  # Close current workspace
+
+# --- Worktrees ---
+remove_worktree = "prefix+shift+k"
+
+
+[ui.sound]
+enabled = false
+
+[theme]
+name = "catppuccin"
+auto_switch = false
+
+[ui.toast]
+delivery = "system"
