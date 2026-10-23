@@ -19,6 +19,24 @@ herdr server reload-config
 
 Or press `Ctrl+b`, then `Shift+r` inside Herdr.
 
+## Machines
+
+Saved SSH machines live in Herdr's local state, not in `config.toml`. One
+`herdr` window shows Local plus every saved machine in the sidebar, so
+separate `herdr --remote` windows are not needed. To recreate them:
+
+```bash
+herdr machine add ssh://jacob@stephens.page   --remote-session default --label stephens.page
+herdr machine add ssh://jacob@thirdshift.app  --remote-session default --label thirdshift.app
+herdr machine add ssh://jstephens@dev         --remote-session default --label dev
+herdr machine add ssh://jstephens@test        --remote-session default --label test
+herdr machine add ssh://jstephens@orchestrate --remote-session default --label orchestrate
+```
+
+`herdr machine status` checks them; `herdr --machine <label> agent list`
+runs API commands on one. `machine add` has no `-i` or `-p` flags: put keys
+and ports in `~/.ssh/config` or in the target (`ssh://you@host:2222`).
+
 ## Configured Keybindings
 
 All shortcuts use the default prefix `Ctrl+b` (press and release `Ctrl+b`, then press the action key).

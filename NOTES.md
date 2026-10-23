@@ -37,3 +37,35 @@ same session (`01a09015-9723-70f1-b140-da70d4663eca`) with `--yolo` and
 `idle`. A `muse()` wrapper in `~/.zshrc` does the same for future launches.
 Confirmed on the issue:
 https://github.com/herdrdev/herdr/issues/3951#issuecomment-5634273623
+
+## Upgrading servers without killing agents
+
+- 2026-10-23: upgraded Local and all saved machines to 0.9.5 stable.
+
+`herdr status` can show the binary on 0.9.5 while the running server is
+older (`server_binary_stale: yes`). Saved-machine API forwarding needs a
+current server; on 0.9.0, `herdr --machine test ...` failed with
+`remote Herdr does not support machine API forwarding`.
+
+`herdr update --handoff` moves live panes to the new server, so agents keep
+running. It only acts when a newer release exists, and
+`herdr --remote <target> --handoff` leaves a compatible server alone. When the
+binary is already current, install the previous release binary, then hand off:
+
+```bash
+B=~/.local/bin/herdr
+cp -p "$B" "$B.bak"
+curl -fsSL -o "$B" https://github.com/herdrdev/herdr/releases/download/v0.9.4/herdr-linux-x86_64  # herdr-macos-aarch64 locally
+chmod +x "$B"
+herdr update --handoff
+```
+
+On the Mac, `herdr update` refuses to run inside a Herdr pane. Run it outside
+Herdr, or clear the `HERDR_*` variables with `env -u`. After the handoff, run
+`herdr integration status` and reinstall the integrations marked `outdated`.
+Agents can be missing from `herdr agent list` for a few seconds after a
+handoff.
+
+`orchestrate`'s Claude panes show `unknown` and are absent from
+`herdr agent list`, both before and after the upgrade. If Claude starts
+through a wrapper there, the agents docs suggest `HERDR_AGENT=claude <wrapper> -- claude`.
