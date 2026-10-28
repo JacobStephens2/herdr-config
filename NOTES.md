@@ -69,3 +69,14 @@ handoff.
 `orchestrate`'s Claude panes show `unknown` and are absent from
 `herdr agent list`, both before and after the upgrade. If Claude starts
 through a wrapper there, the agents docs suggest `HERDR_AGENT=claude <wrapper> -- claude`.
+
+## Taller machines list in the sidebar
+
+- 2026-10-28, Herdr 0.9.5
+
+There is no config key to hide the agents section; `ui.sidebar.agents.*` only
+changes row layout and `ui.agent_panel_sort` only ordering. Drag the divider
+under `new · Local … menu` (above `agents`) down with the mouse instead. Herdr
+saves the position as `sidebar_section_split` in `session.json`, so it
+survives restarts. Don't edit that file by hand; the running server overwrites
+it.
